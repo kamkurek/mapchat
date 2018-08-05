@@ -36,4 +36,8 @@ public class MarkerModel implements Serializable {
   public String getName() {
     return name;
   }
+
+  public boolean isClickable() {
+    return !name.equals("You");
+  }
 }

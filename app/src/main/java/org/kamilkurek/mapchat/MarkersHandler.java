@@ -49,12 +49,13 @@ class MarkersHandler implements Serializable, GoogleMap.OnMarkerClickListener {
 
   @Override
   public boolean onMarkerClick(Marker marker) {
-    System.out.println("Marker CLICK");
     if(buttonPressed) {
-      Intent intent = new Intent(activity, ChatActivity.class);
-      intent.putExtra("marker", markers.get(marker));
-      activity.startActivity(intent);
-      buttonPressed = false;
+      if(markers.get(marker) != null && markers.get(marker).isClickable()) {
+        Intent intent = new Intent(activity, ChatActivity.class);
+        intent.putExtra("marker", markers.get(marker));
+        activity.startActivity(intent);
+        buttonPressed = false;
+      }
     } else {
       buttonPressed = true;
       new Handler().postDelayed(() -> buttonPressed = false, 2000);
